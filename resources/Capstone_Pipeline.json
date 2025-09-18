@@ -1,0 +1,24 @@
+{
+    "id": "327fc744-898c-4dce-b8d9-0316766d165a",
+    "pipeline_type": "WORKSPACE",
+    "development": true,
+    "continuous": false,
+    "channel": "PREVIEW",
+    "photon": true,
+    "libraries": [
+        {
+            "notebook": {
+                "path": "/Users/veenvg@gmail.com/DBLearning/notebooks/1_bronze_silver"
+            }
+        },
+        {
+            "notebook": {
+                "path": "/Users/veenvg@gmail.com/DBLearning/notebooks/2_gold"
+            }
+        }
+    ],
+    "name": "Capstone Pipeline",
+    "serverless": true,
+    "catalog": "Capstone",
+    "schema": "bronze"
+}

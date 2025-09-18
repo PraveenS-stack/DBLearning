@@ -1,0 +1,43 @@
+bundle:
+  name: Capstone_claims
+
+targets:
+  dev:
+    default: true
+    workspace:
+      host: https://${bundle.target}.cloud.databricks.com
+
+resources:
+  pipelines:
+    Capstone_claims_pipeline:
+      name: "Healthcare Claims Pipeline"       
+      serverless: true       
+      catalog: "Capstone"
+      target: "bronze"
+      libraries:
+        - notebook:
+            path: ../notebooks/1_bronze_silver.ipynb
+        - notebook:
+            path: ../notebooks/2_gold.ipynb
+      development: true
+      continuous: false
+
+  jobs:
+    Capstone_claims_job:
+      name: "Healthcare Claims"
+      tasks:
+        - task_key: "Initialize"
+          notebook_task:
+            notebook_path: ../notebooks/0_Initialize.ipynb
+            
+        - task_key: "Ingestions"
+          depends_on:
+            - task_key: "Initialize"
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.Capstone_claims_pipeline.id}
+            
+        - task_key: "Validate"
+          depends_on:
+            - task_key: "Ingestions"
+          notebook_task:
+            notebook_path: ../notebooks/3_validation.ipynb
