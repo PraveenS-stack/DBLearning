@@ -1,0 +1,14 @@
+resources:
+  pipelines:
+    pipeline_capstone2:
+      name: Capstone2
+      libraries:
+        - notebook:
+            path: /Users/veenvg@gmail.com/DBLearning/notebooks/2_gold
+      schema: gold
+      continuous: false
+      development: true
+      photon: true
+      channel: PREVIEW
+      catalog: capstone
+      serverless: true
